@@ -1,0 +1,33 @@
+// # practice_algorithm
+
+
+public class N_QUEEN_DEMO {
+	public static void main(String[] args) {
+		int n=8;
+		int [] record= new int[n];
+		int res=process1(0,record,n);
+		System.out.println(res);
+	}
+	public static boolean isValid(int [] record ,int i,int j){
+		for(int k=0;k<i;k++){
+			if(record[k]==j || Math.abs(record[k]-j)==Math.abs(i-k)){
+				return false;
+			}
+		}
+		return true;
+	}
+	// i : 表示的是 行号 ，n 表示的是  多少行
+	public static int process1(int i,int [] record,int n){  
+		if(i==n){
+			return 1;
+		}
+		int res=0;
+		for(int j=0;j<n;j++){
+			if(isValid(record,i,j)){
+				record[i]=j;
+				res+=process1(i+1,record,n);
+			}
+		}
+		return res;
+	}
+}
